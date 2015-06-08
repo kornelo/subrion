@@ -1,0 +1,21 @@
+/**
+ * Divas Cookies jquery plugin for Cookie Policy banner stylesheet
+ * @author: CodingDivas
+ * @date: 2014/10/27
+ * @version: 0.2 production
+ */
+
+.divascookies {
+	top: 0;
+	background: #313131;
+	color: #f9fafc;
+}
+
+.divascookies-accept-button-container > .divascookies-accept-button-text {
+	background: #f9fafc;
+	color: #313131;
+}
+
+.divascookies-accept-button-container > .divascookies-accept-button-text:hover {
+	background: #e3e4e6;
+}

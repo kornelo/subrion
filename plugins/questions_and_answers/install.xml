@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin name="questions_and_answers">
+	<title>Questions and Answers</title>
+	<summary>Allows to create Questions and Answers Service.</summary>
+	<author>David Munroe</author>
+	<version>1.0.0</version>
+	<date>2015-02-14</date>
+	<compatibility>3.2.0</compatibility>
+
+	<actions>
+		<action name="questions_and_answers_view" url="questions_and_answers/" icon="list" order="1" pages="questions_and_answers:add, questions_and_answers:edit">View</action>
+		<action name="questions_and_answers_add" url="questions_and_answers/add/" icon="plus" order="2" pages="questions_and_answers">New Question</action>
+	</actions>
+
+	<adminpages>
+		<page group="content" name="questions_and_answers" menus="menu" url="questions_and_answers/" filename="index" order="50">Questions and Answers</page>
+	</adminpages>
+
+	<pages>
+		<page name="questions_and_answers" url="questions_and_answers/" menus="bottom">Questions and Answers</page>
+		<page name="questions_and_answers_add" url="questions_and_answers/add/" action="add" parent="questions_and_answers">New question</page>
+	</pages>
+
+	<phrases>
+		<phrase category="common" key="question">Question</phrase>
+		<phrase category="common" key="questions_and_answers">Question added</phrase>
+		<phrase category="common" key="questions_and_answers_added">Question and Answers</phrase>
+		<phrase category="frontend" key="your_answer">Your answer</phrase>
+		<phrase category="frontend" key="be_first">This question has not been answered yet, be the first!</phrase>
+		<phrase category="frontend" key="add_new_question">Add new question</phrase>
+		<phrase category="frontend" key="any_question">Any questions? Let's discuss it together.</phrase>
+		<phrase category="frontend" key="email_notification">Receive email notification when get an answer.</phrase>
+	</phrases>
+
+	<configgroup name="questions_and_answers">Questions and Answers Settings</configgroup>
+
+	<config group="questions_and_answers" type="divider" name="questions_and_answers_plugin">General</config>
+	<config group="questions_and_answers" type="radio" name="questions_and_answers_approve" multiple_values="1,0" description="Auto approve questions and answers from guests">1</config>
+	<config group="questions_and_answers" type="radio" name="questions_and_answers_authorized" multiple_values="1,0" description="Only autorized members can ask and answer">0</config>
+	
+
+
+
+	<install>
+		<sql>
+			<![CDATA[
+CREATE TABLE IF NOT EXISTS `{prefix}questions_and_answers` (
+	`id` int(4) NOT NULL auto_increment,
+	`name` varchar(150) NOT NULL,
+	`member_id` int(4) default NULL,
+	`avatar_color` int(4) NULL,
+	`avatar` text NOT NULL,
+	`alias` text NOT NULL,
+	`email` varchar(50) default NULL,
+	`title` varchar(150) NOT NULL,
+	`body` text NOT NULL,
+	`date` datetime NOT NULL,
+	`view_num` int(8) NOT NULL,
+	`answers_num` int(8) NOT NULL,
+	`send_mail` int(1) NOT NULL,
+	`last_answer` datetime NOT NULL,
+	`status` enum('inactive','active') NOT NULL default 'inactive',
+	PRIMARY KEY  (`id`)
+) {mysql_version};
+			]]>
+		</sql>
+	</install>
+
+	<uninstall>
+		<sql>
+			<![CDATA[
+DROP TABLE IF EXISTS `{prefix}questions_and_answers`;
+			]]>
+		</sql>
+	</uninstall>
+
+	<install>
+		<sql>
+			<![CDATA[
+CREATE TABLE IF NOT EXISTS `{prefix}questions_and_answers_otvety` (
+	`id` int(4) NOT NULL auto_increment,
+	`topic_id` varchar(150) NOT NULL,
+	`send_mail` int(1) NOT NULL,
+	`member` varchar(150) default NULL,
+	`avatar_color` int(4) NULL,
+	`member_id` int(4) default NULL,
+	`email` varchar(50) default NULL,
+	`body` text NOT NULL,
+	`likes` int NULL,
+	`date` datetime NOT NULL,
+	`status` enum('inactive','active') NOT NULL default 'active',
+	PRIMARY KEY  (`id`)
+) {mysql_version};
+			]]>
+		</sql>
+	</install>
+
+	<uninstall>
+		<sql>
+			<![CDATA[
+DROP TABLE IF EXISTS `{prefix}questions_and_answers_otvety`;
+			]]>
+		</sql>
+	</uninstall>
+</plugin>

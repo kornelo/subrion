@@ -1,0 +1,1 @@
+a:1:{i:0;a:10:{s:2:"id";s:1:"1";s:7:"menu_id";s:1:"2";s:9:"parent_id";s:1:"0";s:5:"el_id";s:5:"1_001";s:9:"page_name";s:5:"index";s:5:"level";s:1:"0";s:8:"nofollow";s:1:"0";s:10:"new_window";s:1:"0";s:6:"action";s:4:"read";s:10:"custom_url";s:0:"";}}

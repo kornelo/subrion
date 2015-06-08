@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<plugin name="eu_cookie">
+	<title>EU Cookie Policy banner</title>
+	<summary>Plugin shows banner with information that this website is using cookies.</summary>
+	<author>Intelliants LLC</author>
+	<contributor>Intelliants LLC</contributor>
+	<version>1.0.0</version>
+	<date>2015-05-15</date>
+	<compatibility>3.3</compatibility>
+
+	<configgroup name="eu_cookie">EU Cookie Policy</configgroup>
+	<config group="eu_cookie" type="divider" name="eu_cookie_plugin" private="1">Configuration</config>
+	<config group="eu_cookie" type="text" name="eu_cookie_text" description="Text">This website uses cookies.</config>
+	<config group="eu_cookie" type="text" name="eu_cookie_policylinktext" description="Policy Link text">More info</config>
+	<config group="eu_cookie" type="text" name="eu_cookie_btntext" description="Button text">I understand</config>
+	<config group="eu_cookie" type="divider" name="eu_cookie_plugin2" private="1">Styles</config>
+	<config group="eu_cookie" type="select" name="eu_cookie_position" multiplevalues="top,bottom" description="Position">bottom</config>
+	<config group="eu_cookie" type="select" name="eu_cookie_theme" multiplevalues="dark,light" description="Theme">dark</config>
+	<config group="eu_cookie" type="select" name="eu_cookie_openeffect" multiplevalues="fade,slideUp,slideDown,slideLeft,slideRight" description="Open effect">slideUp</config>
+	<config group="eu_cookie" type="text" name="eu_cookie_openeffectduration" description="Open effect duration (ms)">600</config>
+	<config group="eu_cookie" type="select" name="eu_cookie_openeffecteasing" multiplevalues="swing,linear" description="Open effect easing">swing</config>
+	<config group="eu_cookie" type="select" name="eu_cookie_closeeffect" multiplevalues="fade,slideUp,slideDown,slideLeft,slideRight" description="Close effect">slideDown</config>
+	<config group="eu_cookie" type="text" name="eu_cookie_closeeffectduration" description="Close effect duration (ms)">600</config>
+	<config group="eu_cookie" type="select" name="eu_cookie_closeeffecteasing" multiplevalues="swing,linear" description="Close effect easing">swing</config>
+
+	<hooks>
+		<hook name="smartyFrontAfterHeadSection" type="smarty">
+			<![CDATA[
+{ia_print_css files="_IA_URL_plugins/eu_cookie/templates/front/css/divascookies, _IA_URL_plugins/eu_cookie/templates/front/css/divascookies_style_{$config.eu_cookie_theme}_{$config.eu_cookie_position}"}
+{ia_print_js files="_IA_URL_plugins/eu_cookie/js/frontend/jquery.divascookies-0.3.min"}
+{ia_add_js}
+$(function()
+{
+	$.DivasCookies({
+		bannerText: '{$config.eu_cookie_text}',
+		acceptButtonText: '{$config.eu_cookie_btntext}',
+		cookiePolicyLink: '{$smarty.const.IA_URL}policy/',
+		cookiePolicyLinkText: '{$config.eu_cookie_policylinktext}',
+		openEffect: '{$config.eu_cookie_openeffect}',
+		openEffectDuration: {$config.eu_cookie_openeffectduration},
+		openEffectEasing: '{$config.eu_cookie_openeffecteasing}',
+		closeEffect: '{$config.eu_cookie_closeeffect}',
+		closeEffectDuration: {$config.eu_cookie_closeeffectduration},
+		closeEffectEasing: '{$config.eu_cookie_closeeffecteasing}'
+	});
+});
+{/ia_add_js}
+			]]>
+		</hook>
+	</hooks>
+</plugin>

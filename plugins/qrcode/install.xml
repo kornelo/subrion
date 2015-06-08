@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin name="qrcode">
+	<title>QRCode</title>
+	<summary>This mod allows you to integrate QRCode on your website powered by Subrion CMS.</summary>
+	<author>Olair Marcos</author>
+	<contributor>Intelliants LLC</contributor>
+	<version>3.1.0</version>
+	<date>2014-01-30</date>
+	<compatibility>3.1.0</compatibility>
+	<status>active</status>
+	
+	
+	
+	<phrases>
+		<phrase category="frontend" key="qrcode">QRCode</phrase>
+	</phrases>
+	
+	<configgroup name="qrcode">QRCode</configgroup>
+	<config group="qrcode" name="qrcode_plugin" type="divider">General Configuration</config>
+	<config group="qrcode" name="qrcode_w" type="text" description="QRCode Width/Height">200</config>	
+
+	<blocks>
+		<block title="QR Code" name="qrcode_block" showheader="1" collapsible="0" position="left" type="smarty" sticky="1">
+			<![CDATA[
+			<center>
+				<img src=" http://chart.apis.google.com/chart?chs={$config.qrcode_w}x{$config.qrcode_w}&cht=qr&chld=|0&chl={$smarty.const.IA_SELF}">
+			</center>
+			]]>
+			
+		</block>
+	</blocks>
+	
+</plugin>
